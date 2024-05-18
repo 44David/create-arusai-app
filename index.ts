@@ -6,6 +6,11 @@ interface CliStructure {
     packages: Packages[],   
 }
 
+const defaultCliStructure: CliStructure =  {
+    appName: "Arusai-App",
+    packages: ["clerk-auth"],
+}
+
 export const Cli = async () => {
 
 const program = new Command();    
