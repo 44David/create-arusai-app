@@ -7,4 +7,7 @@
 - [x] - Complete core CLI components
 - [x] - Style commands
 - [ ] - Add all template files for each option
+    - [ ] - Firebase Config Files
+    - [ ] - Shadcn io config and components files
+    - [ ] - postgresql .env and db files
 - [ ] - Publish to npm

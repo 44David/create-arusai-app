@@ -11,7 +11,7 @@ interface CliStructure {
 }
 
 const defaultCliStructure: CliStructure =  {
-    appName: "My--App",
+    appName: "My-Arusai-App",
     packages: ["dotenv", "typescript", "eslint"],
 }
 
@@ -21,6 +21,7 @@ const templateFiles = async(projectDirectory: string, options:
         useDrizzle: boolean, 
         useFirebase: boolean,
         usePostgresql: boolean,
+        useShadcnui: boolean,
     }
 ) => {
     const baseTemplate = path.join(__dirname, 'templates', 'base');
@@ -42,6 +43,11 @@ const templateFiles = async(projectDirectory: string, options:
         const postgresqlTemplate = path.join(__dirname, 'templates', 'postgresql')
         await fs.copy(postgresqlTemplate, projectDirectory);
     }
+    if (options.useShadcnui) {
+        const shadcnuiTemplate = path.join(__dirname, 'templates', 'shadcnui')
+        await fs.copy(shadcnuiTemplate, projectDirectory);
+    }
+
 }
 
 export const Cli = async (): Promise<CliStructure> => {
@@ -51,7 +57,7 @@ export const Cli = async (): Promise<CliStructure> => {
             .version("1.0.0")
             .description("Creates a robust web app template using modern web technologies.")
             .action(async () => {
-                console.log(chalk.red.bgWhite.bold("Create  App"))
+                console.log(chalk.red.bgWhite.bold("Create Arusai App"))
                 const project = await p.group(
                     {
                         name: () => 
@@ -71,12 +77,25 @@ export const Cli = async (): Promise<CliStructure> => {
                             })
                         },
 
+                        shadcnui: () => {
+                            return p.select({
+                                message: "Will you use shadcn UI components?",
+                                options: [
+                                    { value: "shadcnui", label: "Yes"},
+                                    { value: "none", label: "No" }
+
+                                ],
+                                initialValue: "none"
+                            })
+                        },
+
                         authentication: () => {
                             return p.select({
                                 message: "What authentication will you use? (Use arrow keys)",
                                 options: [
+                                    { value: "clerk-auth", label: "Clerk Authentication" },
                                     { value: "none", label: "None" },
-                                    { value: "clerk-auth", label: "Clerk Authentication" }
+                                    
                                 ],
                                 initialValue: "none"
                             });
@@ -86,9 +105,11 @@ export const Cli = async (): Promise<CliStructure> => {
                             return p.select({
                                 message: "What database/backend will you use? (Use arrow keys)",
                                 options: [
-                                    { value: "none", label: "None" },
+
                                     { value: "postgresql", label: "Vercel Postgresql" },
                                     { value: "firebase", label: "Firebase" },
+                                    { value: "none", label: "None" },
+
                                 ],
                                 initialValue: "none"
                             })
@@ -99,8 +120,10 @@ export const Cli = async (): Promise<CliStructure> => {
                             return p.select({
                                 message: "What database ORM will you use? (Use arrow keys)",
                                 options: [
-                                    { value: "none", label: "None" },
+
                                     { value: "drizzle", label: "Drizzle ORM" },
+                                    { value: "none", label: "None" },
+
                                 ],
                                 initialValue: "none"
                             })
@@ -121,7 +144,9 @@ export const Cli = async (): Promise<CliStructure> => {
                 if (project.name) packages.push("next", "dotenv", "typescript", "eslint");
                 
 
-                if (project.framework === "nextjs") execSync(`npx create-next-app@14.2.2 ${project.name} --ts`, {stdio: 'inherit'})
+                if (project.framework === "nextjs") execSync(`npx create-next-app@14.2.2 ${project.name} --ts --eslint --app --src-dir --tailwind --import-alias=@/*`, {stdio: 'inherit'})
+                
+                if (project.shadcnui === "shadcnui") packages.push("");
 
                 process.chdir(projectDirectory)
 
@@ -134,7 +159,11 @@ export const Cli = async (): Promise<CliStructure> => {
                     useDrizzle: project.databaseORM === "drizzle",
                     useFirebase: project.database === "firebase",
                     usePostgresql: project.database === "postgresql",
+                    useShadcnui: project.shadcnui === "shadcnui",
                 })
+
+                console.log(chalk.blueBright(`type: cd ${project.name}`))
+                console.log(chalk.blueBright('and run `npm run dev` to run your local development server'))
 
                 return {
                     appName: project.name,            
@@ -152,7 +181,6 @@ export const Cli = async (): Promise<CliStructure> => {
 if (require.main === module) {
     Cli().then(() => {
         console.log(chalk.green('Success! Arusai Create App ran successfully'))
-        console.log(chalk.blueBright('Run `npm run dev` to run your local development server'))
     }).catch((err) => {
         console.error('Error creating project: ', err)
     })
