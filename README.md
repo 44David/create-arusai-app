@@ -4,6 +4,7 @@
 
 ## To Do 
 
-- [ ] - Complete core CLI components
-- [ ] - Style commands
+- [x] - Complete core CLI components
+- [x] - Style commands
+- [ ] - Add all template files for each option
 - [ ] - Publish to npm
