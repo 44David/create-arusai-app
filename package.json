@@ -4,7 +4,7 @@
   "description": "Create a full stack web app",
   "main": "index.ts",
   "scripts": {
-    "postinstall": "npx ts-node index.ts"
+    "postinstall": "node script.js"
   },
   "keywords": [],
   "author": "David Soane",
