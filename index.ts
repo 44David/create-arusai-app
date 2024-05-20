@@ -3,7 +3,7 @@ import * as p from '@clack/prompts';
 import { execSync } from 'child_process';
 import * as path from 'path';
 import chalk from 'chalk'
-import fs from 'fs-extra'
+import * as fs from 'fs-extra'
 
 interface CliStructure {
     appName: string;
@@ -162,8 +162,6 @@ export const Cli = async (): Promise<CliStructure> => {
                     usePostgresql: project.database === "postgresql",
                     // useShadcnui: project.shadcnui === "shadcnui",
                 })
-
-                execSync("git init")
 
                 console.log(chalk.green('Success!') + ' Arusai Create App built successfully!')
                 console.log(chalk.blueBright(`type: cd ${project.name} and run "npm run dev" to start you local development server`))
