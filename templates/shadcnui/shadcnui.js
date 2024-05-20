@@ -1,1 +1,0 @@
-console.log("Made with template, shadcnui")

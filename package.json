@@ -1,13 +1,14 @@
 {
   "name": "create-arusai-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Create a full stack web app",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npx ts-node index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "David Soane",
   "license": "ISC",
   "dependencies": {
     "@clack/prompts": "^0.7.0",
