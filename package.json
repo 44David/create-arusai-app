@@ -1,6 +1,6 @@
 {
-  "name": "create-arusai-stack",
-  "version": "4.1.0",
+  "name": "create-arusai-app",
+  "version": "1.0.0",
   "description": "Create a full stack web app",
   "main": "index.ts",
   "keywords": [],

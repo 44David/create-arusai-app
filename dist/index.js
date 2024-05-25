@@ -49,37 +49,39 @@ var defaultCliStructure = {
     packages: ["dotenv", "typescript", "eslint"],
 };
 var templateFiles = function (projectDirectory, options) { return __awaiter(void 0, void 0, void 0, function () {
-    var baseTemplate, clerkTemplate, drizzleTemplate, firebaseTemplate, postgresqlTemplate;
+    var rootDirectory, baseTemplate, clerkTemplate, drizzleTemplate, firebaseTemplate, postgresqlTemplate;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                baseTemplate = path.join(__dirname, 'templates', 'base');
+                rootDirectory = path.resolve(__dirname, '..');
+                console.log(rootDirectory);
+                baseTemplate = path.join(rootDirectory, 'templates', 'base');
                 return [4 /*yield*/, fs.copy(baseTemplate, projectDirectory)];
             case 1:
                 _a.sent();
                 if (!options.useClerk) return [3 /*break*/, 3];
-                clerkTemplate = path.join(__dirname, 'templates', 'clerk');
+                clerkTemplate = path.join(rootDirectory, 'templates', 'clerk');
                 return [4 /*yield*/, fs.copy(clerkTemplate, projectDirectory)];
             case 2:
                 _a.sent();
                 _a.label = 3;
             case 3:
                 if (!options.useDrizzle) return [3 /*break*/, 5];
-                drizzleTemplate = path.join(__dirname, 'templates', 'drizzle');
+                drizzleTemplate = path.join(rootDirectory, 'templates', 'drizzle');
                 return [4 /*yield*/, fs.copy(drizzleTemplate, projectDirectory)];
             case 4:
                 _a.sent();
                 _a.label = 5;
             case 5:
                 if (!options.useFirebase) return [3 /*break*/, 7];
-                firebaseTemplate = path.join(__dirname, 'templates', 'firebase');
+                firebaseTemplate = path.join(rootDirectory, 'templates', 'firebase');
                 return [4 /*yield*/, fs.copy(firebaseTemplate, projectDirectory)];
             case 6:
                 _a.sent();
                 _a.label = 7;
             case 7:
                 if (!options.usePostgresql) return [3 /*break*/, 9];
-                postgresqlTemplate = path.join(__dirname, '../templates', 'postgresql');
+                postgresqlTemplate = path.join(rootDirectory, 'templates', 'postgresql');
                 return [4 /*yield*/, fs.copy(postgresqlTemplate, projectDirectory)];
             case 8:
                 _a.sent();

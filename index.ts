@@ -27,24 +27,26 @@ const templateFiles = async(projectDirectory: string, options:
         // useShadcnui: boolean,
     }
 ) => {
+    
     const rootDirectory = path.resolve(__dirname, '..')
-    const baseTemplate = path.join(rootDirectory, '..', 'templates', 'base');
+    console.log(rootDirectory)
+    const baseTemplate = path.join(rootDirectory, 'templates', 'base');
     await fs.copy(baseTemplate, projectDirectory);
-
+    
     if (options.useClerk) {
-        const clerkTemplate = path.join(__dirname, '..', 'templates', 'clerk')
+        const clerkTemplate = path.join(rootDirectory, 'templates', 'clerk')
         await fs.copy(clerkTemplate, projectDirectory);
     }
     if (options.useDrizzle) {
-        const drizzleTemplate = path.join(__dirname,'..', 'templates', 'drizzle')
+        const drizzleTemplate = path.join(rootDirectory, 'templates', 'drizzle')
         await fs.copy(drizzleTemplate, projectDirectory);
     }
     if (options.useFirebase) {
-        const firebaseTemplate = path.join(__dirname, '..', 'templates', 'firebase')
+        const firebaseTemplate = path.join(rootDirectory, 'templates', 'firebase')
         await fs.copy(firebaseTemplate, projectDirectory);
     }
     if (options.usePostgresql) {
-        const postgresqlTemplate = path.join(__dirname, '..', 'templates', 'postgresql')
+        const postgresqlTemplate = path.join(rootDirectory, 'templates', 'postgresql')
         await fs.copy(postgresqlTemplate, projectDirectory);
     }
     // if (options.useShadcnui) {
