@@ -4,7 +4,7 @@
 
 ### Creates a template for a modern web app using popular web technologies
 
-```npm create arusai-stack``` to start a project 
+```npm create arusai-stack@latest``` to start a project 
 
 ## Future Additions
 
