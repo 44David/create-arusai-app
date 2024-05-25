@@ -1,9 +1,12 @@
+#!/usr/bin/env node
+
 const { Command } = require('commander');
 import * as p from '@clack/prompts';
 import { execSync } from 'child_process';
 import * as path from 'path';
-import chalk from 'chalk'
+import * as chalk from 'chalk'
 import * as fs from 'fs-extra'
+
 
 interface CliStructure {
     appName: string;
@@ -24,23 +27,24 @@ const templateFiles = async(projectDirectory: string, options:
         // useShadcnui: boolean,
     }
 ) => {
-    const baseTemplate = path.join(__dirname, 'templates', 'base');
+    const rootDirectory = path.resolve(__dirname, '..')
+    const baseTemplate = path.join(rootDirectory, '..', 'templates', 'base');
     await fs.copy(baseTemplate, projectDirectory);
 
     if (options.useClerk) {
-        const clerkTemplate = path.join(__dirname, 'templates', 'clerk')
+        const clerkTemplate = path.join(__dirname, '..', 'templates', 'clerk')
         await fs.copy(clerkTemplate, projectDirectory);
     }
     if (options.useDrizzle) {
-        const drizzleTemplate = path.join(__dirname, 'templates', 'drizzle')
+        const drizzleTemplate = path.join(__dirname,'..', 'templates', 'drizzle')
         await fs.copy(drizzleTemplate, projectDirectory);
     }
     if (options.useFirebase) {
-        const firebaseTemplate = path.join(__dirname, 'templates', 'firebase')
+        const firebaseTemplate = path.join(__dirname, '..', 'templates', 'firebase')
         await fs.copy(firebaseTemplate, projectDirectory);
     }
     if (options.usePostgresql) {
-        const postgresqlTemplate = path.join(__dirname, 'templates', 'postgresql')
+        const postgresqlTemplate = path.join(__dirname, '..', 'templates', 'postgresql')
         await fs.copy(postgresqlTemplate, projectDirectory);
     }
     // if (options.useShadcnui) {
