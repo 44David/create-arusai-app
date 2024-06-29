@@ -8,6 +8,7 @@
 
 ## Future Additions
 
+- [ ] - Add website templates
 - [ ] - Support for full stack mobile apps using expo
 - [ ] - Include options for different UI libraries
 - [ ] - Include better support for databases and backend code
